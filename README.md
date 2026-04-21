@@ -285,7 +285,7 @@ git push origin main
 ### 🔍 Verificação Automática
 
 1. Acesse a aba **Actions** no GitHub  
-2. Verifique se o workflow foi executado com sucesso (✅)  
+2. Verifique se o workflow foi executado com sucesso (✅)
 3. Em caso de erro (❌), consulte os logs, corrija e envie novamente
 
 <img width="807" height="363" alt="image" src="https://github.com/user-attachments/assets/d991d35b-2bc2-48f7-9ac7-cf5ca9dc452a" />
