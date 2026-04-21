@@ -25,7 +25,7 @@ keras_path = "model.h5"
 converter = tf.lite.TFLiteConverter.from_keras_model(model)
 converter.optimizations = [tf.lite.Optimize.DEFAULT]  # quantização pós-treinamento (intervalo dinâmico)
 tflite_dynamic = converter.convert()
-tfl_dyn_path = "teste_dynamic.tflite"
+tfl_dyn_path = "model.tflite"
 with open(tfl_dyn_path, "wb") as f:
     f.write(tflite_dynamic)
 print("Gerado:", tfl_dyn_path)
