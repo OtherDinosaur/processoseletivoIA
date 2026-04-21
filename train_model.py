@@ -4,12 +4,10 @@ from tensorflow.keras import layers
 from keras.datasets import mnist
 from sklearn.model_selection import train_test_split
 from keras.models import Sequential
-from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense, Dropout
+from keras.layers import Conv2D, MaxPooling2D, Flatten, Dense
 from keras.optimizers import Adam
-from matplotlib import pyplot
 
-#insira seu código aqui
-
+# Carregando o dataset MNIST
 (x_train, y_train), (x_test, y_test) = mnist.load_data()
  
 # Dividindo o dataset de treino em treino e validação de forma balanceada
@@ -19,29 +17,8 @@ x_train, x_val, y_train, y_val = train_test_split(x_train, y_train, stratify=y_t
 print('Quantidade de imagens de treino:', x_train.shape[0])
 print('Quantidade de imagens de validação:', x_val.shape[0])
 print('Quantidade de imagens de test:', x_test.shape[0])
- 
-# Contando quantidade de imagens por dígito
-import collections
-counterTrain=collections.Counter(y_train)
-counterVal=collections.Counter(y_val)
-counterTest=collections.Counter(y_test)
- 
-# Para plotar quantidade de imagens de cada dígito (opcional, pra controle interno)
-"""
- 
-fig, ax = pyplot.subplots()
-rects1 = ax.bar(counterTrain.keys(), counterTrain.values(), label='Treino')
-rects2 = ax.bar(counterVal.keys(), counterVal.values(), label='Validação')
-rects3 = ax.bar(counterTest.keys(), counterTest.values(), label='Teste')
- 
-ax.set_title('Imagens por dígito')
-ax.set_ylabel('Quantidade de imagens')
-ax.set_xlabel('Dígito')
-ax.legend()
-pyplot.savefig('distribuicao_digitos.png')"""
 
 # Formatando o dataset para funcionar como entrada do Keras 
-# As imagens de entradas precisam estar em um array de 4 dimensões
 x_train = x_train.reshape(x_train.shape[0], 28, 28, 1)
 x_val = x_val.reshape(x_val.shape[0], 28, 28, 1)
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
@@ -77,11 +54,8 @@ model.add(Conv2D(28, kernel_size=(3,3), activation='relu'))
 # Operação de flatten (convertento o mapa de características em um vetor)
 model.add(Flatten())
 
-# Camada densa com 128 nerônios seguida da função de ativação ReLU
-model.add(Dense(45, activation='relu'))
-
-# Dropout de 50% dos neurônios
-# model.add(Dropout(0.5))
+# Camada densa com 32 nerônios seguida da função de ativação ReLU
+model.add(Dense(32, activation='relu'))
 
 # Camada densa de saída com 10 (um para cada dígito) seguida de função SoftMax
 model.add(Dense(10, activation='softmax'))
@@ -93,32 +67,17 @@ model.summary();
 adamOptimizer = Adam(learning_rate=0.001)
 model.compile( optimizer=adamOptimizer, loss='sparse_categorical_crossentropy', metrics=['accuracy'] )
 
-# Efetuando o treinamento de 10 épocas com o dataset de treino e validando no dataset de validação
+# Efetuando o treinamento de 4 épocas com o dataset de treino e validando no dataset de validação
 history = model.fit(x=x_train, y=y_train, validation_data=(x_val,y_val), epochs=4, batch_size=16, shuffle=False)
 
-#Avaliando o treinamento do modelo
-score = model.evaluate(x_test, y_test)
-
-print( '\nPerda:{:.3f}\nAcurácia:{}'.format( score[0], score[1] ) )
-
-# Imprimindo uma imagem de exemplo
-image_index = 5492
-pyplot.imshow(x_test[image_index].reshape(28, 28),cmap='Greys')
-pyplot.savefig('imagem_exemplo.png')
-
-# Predizendo o dígito dessa imagem
-pred = model.predict( x_test[image_index].reshape(1, 28, 28, 1) )
-print('\nO valor predito é:', pred.argmax())
 
 
-
-
-
+# avaliando o modelo
 test_loss, test_acc = model.evaluate(x_test, y_test, verbose=0)
-
 y_pred_probs = model.predict(x_test, verbose=0)
 y_pred = tf.argmax(y_pred_probs, axis=1)
 
+# Calculando a matriz de confusão
 cm = tf.math.confusion_matrix(y_test, y_pred)
 print("\n=== MATRIZ DE CONFUSÃO ===")
 print(cm.numpy())
@@ -130,6 +89,7 @@ fp = tf.reduce_sum(cm, axis=0) - tp
 fn = tf.reduce_sum(cm, axis=1) - tp
 tn = tf.reduce_sum(cm) - (tp + fp + fn)
 
+# Criando métricas por classe
 precision = tp / (tp + fp + 1e-7)
 recall    = tp / (tp + fn + 1e-7)
 specificity = tn / (tn + fp + 1e-7)
@@ -147,6 +107,7 @@ for i in range(10):
         f"Acc={accuracy_per_class[i]:.4f}"
     )
 
+# Calculando métricas gerais (média das métricas por classe)
 macro_precision = tf.reduce_mean(precision)
 macro_recall = tf.reduce_mean(recall)
 macro_specificity = tf.reduce_mean(specificity)
@@ -161,3 +122,8 @@ print(f"Specificity (macro): {macro_specificity:.4f}")
 print(f"F1-score (macro): {macro_f1:.4f}")
 
 model.evaluate(x_test, y_test)
+
+# Salvando o modelo em formato Keras .h5
+path = "model.h5"
+model.save(path)
+print("Salvo (Keras .h5):", path)

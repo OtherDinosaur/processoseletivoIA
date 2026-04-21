@@ -316,8 +316,8 @@ Preencha todas as seções de forma clara e objetiva.
 
 ### 1️⃣ Resumo da Arquitetura do Modelo
 
-Descreva, em palavras, a arquitetura da **CNN** implementada no arquivo
-`train_model.py`.
+O modelo de CNN modelado para esse projeto teve como foco principal a otimização de memória, mas ainda chegando a uma precisão geral de 
+98,67%, confiável para a maioria dos usos práticos em uma indústria. Como o dataset é extenso e muito bem estruturado, foi possível obter bons resultados sem requerer muita complexidade por parte do modelo. O modelo possui 3 camadas convolucionais, com uma camada de MaxPooling entre a primeira e a segunda, reduzindo a dimensionalidade do mapa de características. Por conta da simplicidade do objetivo do modelo e do foco em otimização, foi decidido não utilizar a técnica de dropout, observando que o modelo ainda possui bom desempenho, mesmo sem regularização. A camada densa responsável por tomar as decisões possui 32 neurônios. Apesar de ser menos do que normalmente é usado, essa decisão não comprometeu a precisão do modelo, e ainda resultou em uma diminuição considerável no tamanho antes da otimização. por fim, a IA Completou seu objetivo e terminou com um tamanho de 341.35 Kb antes da otimização, chegando a ... depois de quantizada.
 
 
 
@@ -337,27 +337,13 @@ Explique qual técnica foi utilizada para otimizar o modelo no arquivo
 
 ### 4️⃣ Resultados Obtidos
 
-Informe o principal resultado obtido após o treinamento do modelo.
+O modelo treinado
 
 
 
-### 5️⃣ Comentários Adicionais (Opcional)
-
-Utilize este espaço para comentar:
-- Dificuldades encontradas  
-- Decisões técnicas importantes  
-- Limitações do modelo  
-- Aprendizados durante o desafio
+### 5️⃣ Comentários Adicionais
 
 
-## 🆘 Suporte
+- Decisões sobre tamanho e precisão do modelo foram desafiadoras, devido à falta de referência sobre a qualidade dos parâmetros. Porém, a precisão acima de 98% foi considerada aceitável para o modelo e baseado nisso foi usada a menor versão sem alterar demais os padrões.
 
-Em caso de dúvidas:
-
-- Consulte o material dos cursos EAD
-- Leia atentamente este README
-- Analise os logs das GitHub Actions
-- Utilize os canais oficiais para contato com os instrutores
-
-Boa sorte no processo seletivo.
-****
+- O modelo é eficiente para detecção de algarismos em escala de cinza, sendo preciso um tratamento para conversão de escala em cinza no caso de manuscritos coloridos, e pode ter problemas de classificação nas imagens de algarismos com muito ruído visual de fundo.
