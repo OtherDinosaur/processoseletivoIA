@@ -24,7 +24,6 @@ x_val = x_val.reshape(x_val.shape[0], 28, 28, 1)
 x_test = x_test.reshape(x_test.shape[0], 28, 28, 1)
 
 # Cada imagem precisa ter dimensão x, y e z
-
 input_shape = (28, 28, 1)
 
 # Convertento valores dos pixels para float (garantindo precisão em operações de divisão por exemplo)
@@ -37,6 +36,7 @@ x_train /= 255
 x_val /= 255
 x_test /= 255
 
+# Inicializando o modelo sequencial do Keras
 model = Sequential()
 
 # Operação de convolução com filtro 3 x 3 seguida da função de ativação ReLU
@@ -127,3 +127,5 @@ model.evaluate(x_test, y_test)
 path = "model.h5"
 model.save(path)
 print("Salvo (Keras .h5):", path)
+
+
