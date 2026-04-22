@@ -17,10 +17,11 @@ O modelo de CNN modelado para esse projeto teve como foco principal a otimizaç�
 A lista integral das bibliotecas e dependências externas estão no `requirements.txt`, com destaque para as seguintes bibliotecas:
 
 - tensorflow == 2.21.0
-- numpy == 2.4.4
-- keras == 3.14.0
-- scikit-learn == 1.8.0
+- numpy == 2.2.6
+- keras == 3.12.1
+- scikit-learn == 1.7.2
 
+Obs: Algumas bibliotecas tiveram que regredir para versões anteriores para serem aprovadas no workflow.
 
 
 ### 3️⃣ Técnica de Otimização do Modelo
@@ -83,7 +84,7 @@ Sumário:
 - F1-score (geral): 0.9849
 - Latência média (100 execuções): 0.090 ms
 
-Obs: Resultados podem variar para cada máquina
+Obs: Resultados podem variar para cada máquina.
 
 
 ### 5️⃣ Comentários Adicionais
