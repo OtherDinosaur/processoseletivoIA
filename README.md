@@ -9,7 +9,7 @@
 ### 1️⃣ Resumo da Arquitetura do Modelo
 
 O modelo de CNN modelado para esse projeto teve como foco principal a otimização de memória, mas ainda chegando a uma precisão geral de 
-98,67%, confiável para a maioria dos usos práticos em uma indústria. Como o dataset é extenso e muito bem estruturado, foi possível obter bons resultados sem requerer muita complexidade por parte do modelo. O modelo possui 3 camadas convolucionais, com uma camada de MaxPooling entre a primeira e a segunda, reduzindo a dimensionalidade do mapa de características. Por conta da simplicidade do objetivo do modelo e do foco em otimização, foi decidido não utilizar a técnica de dropout, observando que o modelo ainda possui bom desempenho, mesmo sem regularização. A camada densa responsável por tomar as decisões possui 32 neurônios. Apesar de ser menos do que normalmente é usado, essa decisão não comprometeu a precisão do modelo, e ainda resultou em uma diminuição considerável no tamanho antes da otimização. por fim, a IA Completou seu objetivo e terminou com um tamanho de 1040 KB antes da otimização, chegando a aproximadamente 90 KB depois de quantizada.
+98,67% antes da otimização, e 98,51% após otimização, confiável para a maioria dos usos práticos em uma indústria. Como o dataset é extenso e muito bem estruturado, foi possível obter bons resultados sem requerer muita complexidade por parte do modelo. O modelo possui 3 camadas convolucionais, com uma camada de MaxPooling entre a primeira e a segunda, reduzindo a dimensionalidade do mapa de características. Por conta da simplicidade do objetivo do modelo e do foco em otimização, foi decidido não utilizar a técnica de dropout, observando que o modelo ainda possui bom desempenho, mesmo sem regularização. A camada densa responsável por tomar as decisões possui 32 neurônios. Apesar de ser menos do que normalmente é usado, essa decisão não comprometeu a precisão do modelo, e ainda resultou em uma diminuição considerável no tamanho antes da otimização. por fim, a IA Completou seu objetivo e terminou com um tamanho de 1040 KB antes da otimização, chegando a aproximadamente 90 KB depois de quantizada.
 
 
 
@@ -17,10 +17,10 @@ O modelo de CNN modelado para esse projeto teve como foco principal a otimizaç�
 
 A lista integral das bibliotecas e dependências externas estão no `requirements.txt`, com destaque para as seguintes bibliotecas:
 
-- tensorflow==2.21.0
-- numpy==2.4.4
-- keras==3.14.0
-- scikit-learn==1.8.0
+- tensorflow == 2.21.0
+- numpy == 2.4.4
+- keras == 3.14.0
+- scikit-learn == 1.8.0
 
 
 
